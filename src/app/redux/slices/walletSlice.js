@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getRequestWithToken, postRequestWithToken } from "@/app/api/auth";
+import { getRequestWithToken, postRequestWithToken, AuthLogin } from "@/app/api/auth";
 
 const API_ENDPOINTS = {
   GET_ALL_WALLET_TRANS_TYPE: "/WalletReport/getAllWalletTransType",
@@ -177,10 +177,11 @@ export const getWithdrawalHistory = createAsyncThunk(
 );
 export const getUserReffrellLink = createAsyncThunk(
   "wallet/getUserReffrellLink",
-  async (Authlogin, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
+      const authLogin = AuthLogin();
       const response = await postRequestWithToken(
-        `${API_ENDPOINTS.GET_REFERALINK}?Authlogin=${Authlogin}`
+        `${API_ENDPOINTS.GET_REFERALINK}?Authlogin=${authLogin}`
       );
       return response.data;
     } catch (error) {
