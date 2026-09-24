@@ -126,6 +126,7 @@ export default function DashboardHeader({ theme, toggleTheme }) {
 
       try {
         const result = await dispatch(getUserReffrellLink()).unwrap();
+        console.log("TYTTY",result);
       } catch (error) {
         console.error("Failed to fetch referral link:", error);
       }
